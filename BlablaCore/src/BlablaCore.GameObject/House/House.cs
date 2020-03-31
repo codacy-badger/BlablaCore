@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlablaCore.src.BlablaCore.GameObject
+namespace BlablaCore.src.BlablaCore.GameObject.House
 {
-    public class Player
+    public class House
     {
     }
 }
