@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Blablaland_Server.Net
+namespace BlablaCore.Core.Net
 {
-    class Binary : List<byte>
+    public class Binary : List<byte>
     {
         public double bitLength;
         public double bitPosition;

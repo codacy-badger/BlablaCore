@@ -1,6 +1,6 @@
-﻿namespace Blablaland_Server.Net
+﻿namespace BlablaCore.Core.Net
 {
-    class SocketMessage : Binary
+    public class SocketMessage : Binary
     {
 
         public SocketMessage()

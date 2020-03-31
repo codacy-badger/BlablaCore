@@ -3,9 +3,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Blablaland_Server.Net
+namespace BlablaCore.Core.Net
 {
-    class Client
+    public class Client
     {
 
         public double PID
