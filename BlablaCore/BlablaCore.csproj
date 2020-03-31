@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="src\BlablaCore.Database\" />
+    <Folder Include="src\BlablaCore.GameObject\" />
+  </ItemGroup>
+
 </Project>
