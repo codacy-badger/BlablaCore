@@ -2,3 +2,5 @@
 
 # BlablaCore
 BlablaCore est un émulateur Blablaland multiplateforme en C# (.Net Core 3) 
+
+En cours de développement...
