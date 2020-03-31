@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="src\BlablaCore.Database\" />
-    <Folder Include="src\BlablaCore.GameObject\Map\" />
+    <Folder Include="BlablaCore.Database\" />
+    <Folder Include="BlablaCore.GameObject\Map\" />
   </ItemGroup>
 
 </Project>
