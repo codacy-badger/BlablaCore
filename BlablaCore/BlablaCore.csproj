@@ -7,7 +7,8 @@
 
   <ItemGroup>
     <Folder Include="src\BlablaCore.Database\" />
-    <Folder Include="src\BlablaCore.GameObject\" />
+    <Folder Include="src\BlablaCore.GameObject\House\" />
+    <Folder Include="src\BlablaCore.GameObject\Map\" />
   </ItemGroup>
 
 </Project>
