@@ -7,24 +7,11 @@ namespace BlablaCore.Core.Cryptography
 {
     public class Client
     {
+        public double PID { get; private set; }
 
-        public double PID
-        {
-            get;
-            private set;
-        }
+        public IPEndPoint EndPoint { get; private set; }
 
-        public IPEndPoint EndPoint
-        {
-            get;
-            private set;
-        }
-
-        public bool Deconnecter
-        {
-            get;
-            private set;
-        }
+        public bool Disconected { get; private set; }
 
         internal Socket sck;
         public int inCmpt = 12;
@@ -37,14 +24,14 @@ namespace BlablaCore.Core.Cryptography
             sck = accepted;
             EndPoint = (IPEndPoint)sck.RemoteEndPoint;
             sck.BeginReceive(new byte[] { 0 }, 0, 0, 0, callback, null);
-            Deconnecter = false;
+            Disconected = false;
         }
 
         void callback(IAsyncResult AR)
         {
             try
             {
-                if (!Deconnecter)
+                if (!Disconected)
                 {
                     sck.EndReceive(AR);
 
@@ -134,7 +121,7 @@ namespace BlablaCore.Core.Cryptography
             /*sck.Close();
             sck.Dispose();
             GC.Collect();*/
-            Deconnecter = true;
+            Disconected = true;
         }
 
         private void CloseSocket(IAsyncResult AR)
@@ -145,15 +132,9 @@ namespace BlablaCore.Core.Cryptography
             GC.Collect();
         }
 
-        public void Disconnect()
-        {
-            Close();
-        }
+        public void Disconnect() => Close();
 
-        public void update_id(double id)
-        {
-            this.PID = id;
-        }
+        public void update_id(double id) => this.PID = id;
 
         public delegate void ClientReceiveHandler(Client sender, byte[] buf);
         public delegate void ClientDisconnecteHandler(Client sender);
