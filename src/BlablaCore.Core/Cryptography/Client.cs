@@ -14,7 +14,7 @@ namespace BlablaCore.Core.Cryptography
         public bool Disconected { get; private set; }
 
         internal Socket sck;
-        public int inCmpt = 13;
+        public int inCmpt = 12;
         public int outCmpt = 12;
 
         public SocketMessage inBuffer;
