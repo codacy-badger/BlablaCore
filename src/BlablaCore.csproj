@@ -9,8 +9,4 @@
     <PackageReference Include="EntityFramework" Version="6.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BlablaCore.GameObject\" />
-  </ItemGroup>
-
 </Project>
