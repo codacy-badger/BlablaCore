@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BlablaCore.Database\" />
     <Folder Include="BlablaCore.GameObject\Map\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.0" />
   </ItemGroup>
 
 </Project>
