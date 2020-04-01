@@ -1,4 +1,4 @@
-﻿namespace BlablaCore.Core.Net
+﻿namespace BlablaCore.Core.Cryptography
 {
     public class SocketMessage : Binary
     {

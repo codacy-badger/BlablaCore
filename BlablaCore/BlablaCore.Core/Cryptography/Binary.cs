@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BlablaCore.Core.Net
+namespace BlablaCore.Core.Cryptography
 {
     public class Binary : List<byte>
     {
