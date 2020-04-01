@@ -7,7 +7,7 @@ namespace BlablaCore.Core.Cryptography
 {
     public class Client
     {
-        public double PID { get; private set; }
+        public double Pid { get; private set; }
 
         public IPEndPoint EndPoint { get; private set; }
 
