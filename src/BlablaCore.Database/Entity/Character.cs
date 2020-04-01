@@ -13,6 +13,8 @@ namespace BlablaCore.BlablaCore.Database.Entity
 
         public bool Direction { get; set; }
 
+        public short Grade { get; set; }
+
         public short Gender { get; set; }
 
         public short MapId { get; set; }
@@ -24,6 +26,8 @@ namespace BlablaCore.BlablaCore.Database.Entity
         [Required]
         [MaxLength(25)]
         public string Name { get; set; } = "";
+
+        public short ServerId { get; set; }
 
         public int[] SkinColor { get; set; }
 
