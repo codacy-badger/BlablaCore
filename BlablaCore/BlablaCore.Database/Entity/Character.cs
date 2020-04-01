@@ -14,7 +14,10 @@ namespace BlablaCore.BlablaCore.Database.Entity
         public short MapId { get; set; }
         public int MapX { get; set; }
         public int MapY { get; set; }
-        public string Name { get; set; }
+
+        [Required]
+        [MaxLength(25)]
+        public string Name { get; set; } = "";
         public int[] SkinColor { get; set; }
         public short SkinId { get; set; }
         public int Uid { get; set; }
