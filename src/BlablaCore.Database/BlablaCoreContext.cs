@@ -6,6 +6,6 @@ namespace BlablaCore.Database
 {
     public class BlablaCoreContext : DbContext
     {
-        public virtual DbSet<Character>? Character { get; set; }
+        public virtual DbSet<Character> Character { get; set; }
     }
 }
