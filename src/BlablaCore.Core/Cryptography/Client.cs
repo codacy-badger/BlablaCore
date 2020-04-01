@@ -134,7 +134,7 @@ namespace BlablaCore.Core.Cryptography
 
         public void Disconnect() => Close();
 
-        public void update_id(double id) => this.PID = id;
+        public void update_id(double id) => this.Pid = id;
 
         public delegate void ClientReceiveHandler(Client sender, byte[] buf);
         public delegate void ClientDisconnecteHandler(Client sender);
