@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlablaCore.Core", "src\Blab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlablaCore.GameObject", "src\BlablaCore.GameObject\BlablaCore.GameObject.csproj", "{1F38B96C-9585-403C-9634-E4F76E3E34AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlablaCore.Configuration", "BlablaCore.Configuration\BlablaCore.Configuration.csproj", "{32464A96-9A7C-45D8-ACC6-752916335FCA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlablaCore.Configuration", "src\BlablaCore.Configuration\BlablaCore.Configuration.csproj", "{32464A96-9A7C-45D8-ACC6-752916335FCA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
