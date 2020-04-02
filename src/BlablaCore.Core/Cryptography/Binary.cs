@@ -50,7 +50,7 @@ namespace BlablaCore.Core.Cryptography
                     loc4 = 8364;
                 }
                 loc1 += unchecked((char)(byte)(loc4));
-                loc3 =+ 1;
+                loc3 += 1;
             }
             return loc1;
         }
@@ -90,9 +90,9 @@ namespace BlablaCore.Core.Cryptography
                 loc6 = 8 - loc5;
                 loc7 = Math.Min(loc6, loc3);
                 loc8 = (this[(int)loc4] >> (int)(loc6 - loc7) & (int)(_powList[(int)loc7] - 1));
-                loc2 =+ loc8 * _powList[(int)(loc3 - loc7)];
-                loc3 =- loc7; 
-                BitPosition =+ loc7;
+                loc2 += loc8 * _powList[(int)(loc3 - loc7)];
+                loc3 -= loc7; 
+                BitPosition += loc7;
             }
             return loc2;
         }
@@ -140,7 +140,7 @@ namespace BlablaCore.Core.Cryptography
                     loc4 = 255;
                 }
                 BitWriteUnsignedInt(8, loc4);
-                loc3 =+ 1;
+                loc3 += 1;
             }
         }
 
@@ -169,9 +169,9 @@ namespace BlablaCore.Core.Cryptography
                 loc6 = Math.Min(loc5, loc3);
                 loc7 = Rshift(param2, (int)(loc3 - loc6));
                 this[(Count - 1)] = unchecked((byte)(this[(Count - 1)] + loc7 * _powList[(int)(loc5 - loc6)]));
-                param2 =- loc7 * _powList[(int)(loc3 - loc6)];
-                loc3 =- loc6;
-                BitLength =+ loc6;
+                param2 -= loc7 * _powList[(int)(loc3 - loc6)];
+                loc3 -= loc6;
+                BitLength += loc6;
             }
         }
 
@@ -209,7 +209,7 @@ namespace BlablaCore.Core.Cryptography
                 loc3 = Math.Min(8, loc2);
                 loc4 = param1.BitReadUnsignedInt(loc3);
                 BitWriteUnsignedInt(loc3, loc4);
-                loc2 =- loc3;
+                loc2 -= loc3;
             }
         }
 
@@ -252,7 +252,7 @@ namespace BlablaCore.Core.Cryptography
             while (loc1 <= 32)
             {
                 _powList.Add(Math.Pow(2, loc1));
-                loc1 =+ 1;
+                loc1 += 1;
             }
             return true;
         }
