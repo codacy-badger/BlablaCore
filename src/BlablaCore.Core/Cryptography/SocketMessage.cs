@@ -24,12 +24,12 @@ namespace BlablaCore.Core.Cryptography
     {
         public SocketMessage()
         {
-            return;
+
         }
 
         public SocketMessage(byte[] buf)
         {
-            for (int i = 0; i < buf.Length; i++)
+            for (var i = 0; i < buf.Length; i++)
             {
                 Add(buf[i]);
             }
@@ -37,7 +37,7 @@ namespace BlablaCore.Core.Cryptography
 
         public SocketMessage Duplicate()
         {
-            SocketMessage loc1 = new SocketMessage();
+            var loc1 = new SocketMessage();
             loc1.WriteBytes(ToByteArray(), 0, Count);
             loc1.BitLength = BitLength;
             loc1.BitPosition = BitPosition;
@@ -46,27 +46,27 @@ namespace BlablaCore.Core.Cryptography
 
         public void ReadMessage(byte[] param1)
         {
-            int loc2 = 0;
+            var loc2 = 0;
             while (loc2 < param1.Length)
             {
                 if (param1[loc2] == 1)
                 {
-                    loc2 = loc2 + 1;
+                    loc2 += 1;
                     Add((byte)(param1[loc2] == 2 ? (1) : (0)));
                 }
                 else
                 {
                     Add(param1[loc2]);
                 }
-                loc2 = loc2 + 1;
+                loc2 += 1;
             }
             BitLength = Count * 8;
         }
 
         public byte[] ExportMessage()
         {
-            SocketMessage loc1 = new SocketMessage();
-            int loc2 = 0;
+            var loc1 = new SocketMessage();
+            var loc2 = 0;
             while (loc2 < Count)
             {
                 
@@ -84,7 +84,7 @@ namespace BlablaCore.Core.Cryptography
                 {
                     loc1.Add(this[loc2]);
                 }
-                loc2 = loc2 + 1;
+                loc2 += 1;
             }
             return loc1.ToByteArray();
         }

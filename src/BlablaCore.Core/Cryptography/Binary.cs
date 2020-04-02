@@ -39,14 +39,14 @@ namespace BlablaCore.Core.Cryptography
         public string BitReadString()
         {
             double loc4 = 0;
-            string loc1 = "";
-            double loc2 = BitReadUnsignedInt(16);
-            int loc3 = 0;
+            var loc1 = "";
+            var loc2 = BitReadUnsignedInt(16);
+            var loc3 = 0;
             while (loc3 < loc2)
             {
 
                 loc4 = BitReadUnsignedInt(8);
-                if (loc4 == 255)
+                if (loc4.Equals(255))
                 {
                     loc4 = 8364;
                 }
@@ -58,14 +58,14 @@ namespace BlablaCore.Core.Cryptography
 
         private bool BitReadBoolean()
         {
-            if (BitPosition == BitLength)
+            if (BitPosition.Equals(BitLength))
             {
                 return false;
             }
-            int loc1 = (int)Math.Floor((BitPosition / 8));
-            double loc2 = BitPosition % 8;
-            Binary loc3 = this;
-            double loc4 = BitPosition + 1;
+            var loc1 = (int)Math.Floor((BitPosition / 8));
+            var loc2 = BitPosition % 8;
+            var loc3 = this;
+            var loc4 = BitPosition + 1;
             loc3.BitPosition = loc4;
             return (this[loc1] >> (int)(7 - loc2) & 1) == 1;
         }
@@ -83,7 +83,7 @@ namespace BlablaCore.Core.Cryptography
                 return 0;
             }
             double loc2 = 0;
-            double loc3 = param1;
+            var loc3 = param1;
             while (loc3 > 0)
             {
 
@@ -92,8 +92,8 @@ namespace BlablaCore.Core.Cryptography
                 loc6 = 8 - loc5;
                 loc7 = Math.Min(loc6, loc3);
                 loc8 = (this[(int)loc4] >> (int)(loc6 - loc7) & (int)(_powList[(int)loc7] - 1));
-                loc2 = loc2 + loc8 * _powList[(int)(loc3 - loc7)];
-                loc3 = loc3 - loc7; 
+                loc2 =+ loc8 * _powList[(int)(loc3 - loc7)];
+                loc3 =- loc7; 
                 BitPosition = BitPosition + loc7;
             }
             return loc2;
@@ -101,25 +101,25 @@ namespace BlablaCore.Core.Cryptography
 
         public double BitReadSignedInt(double param1)
         {
-            bool loc2 = BitReadBoolean();
+            var loc2 = BitReadBoolean();
             return BitReadUnsignedInt(((param1 - 1) * (loc2 ? (1) : (-1))));
         }
 
         public Binary BitReadBinaryData()
         {
-            double loc1 = BitReadUnsignedInt(16);
+            var loc1 = BitReadUnsignedInt(16);
             return BitReadBinary(loc1);
         }
 
         private Binary BitReadBinary(double param1)
         {
             double loc5 = 0;
-            Binary loc2 = new Binary();
-            double loc3 = BitPosition;
+            var loc2 = new Binary();
+            var loc3 = BitPosition;
             while (BitPosition - loc3 < param1)
             {
 
-                if (BitPosition == BitLength)
+                if (BitPosition.Equals(BitLength))
                 {
                     return loc2;
                 }
@@ -132,18 +132,18 @@ namespace BlablaCore.Core.Cryptography
         public void BitWriteString(string param1)
         {
             double loc4 = 0;
-            double loc2 = Math.Min(param1.Length, (_powList[16] - 1));
+            var loc2 = Math.Min(param1.Length, (_powList[16] - 1));
             BitWriteUnsignedInt(16, loc2);
             double loc3 = 0;
             while (loc3 < loc2)
             {
                 loc4 = unchecked((param1[(int)loc3]));
-                if (loc4 == 8364)
+                if (loc4.Equals(8364))
                 {
                     loc4 = 255;
                 }
                 BitWriteUnsignedInt(8, loc4);
-                loc3 = loc3 + 1;
+                loc3 =+ 1;
             }
         }
 
@@ -153,18 +153,18 @@ namespace BlablaCore.Core.Cryptography
             BitWriteUnsignedInt((param1 - 1), Math.Abs(param2));
         }
 
-        public void BitWriteUnsignedInt(double param1, double param2)
+        private void BitWriteUnsignedInt(double param1, double param2)
         {
             double loc4 = 0;
             double loc5 = 0;
             double loc6 = 0;
             double loc7 = 0;
             param2 = Math.Min((_powList[(int)param1] - 1), param2);
-            double loc3 = param1;
+            var loc3 = param1;
             while (loc3 > 0)
             {
                 loc4 = BitLength % 8;
-                if (loc4 == 0)
+                if (loc4.Equals(0))
                 {
                     Add(Convert.ToByte(false));
                 }
@@ -172,16 +172,16 @@ namespace BlablaCore.Core.Cryptography
                 loc6 = Math.Min(loc5, loc3);
                 loc7 = Rshift(param2, (int)(loc3 - loc6));
                 this[(Count - 1)] = unchecked((byte)(this[(Count - 1)] + loc7 * _powList[(int)(loc5 - loc6)]));
-                param2 = param2 - loc7 * _powList[(int)(loc3 - loc6)];
-                loc3 = loc3 - loc6;
-                BitLength = BitLength + loc6;
+                param2 =- loc7 * _powList[(int)(loc3 - loc6)];
+                loc3 =- loc6;
+                BitLength =+ loc6;
             }
         }
 
-        public void BitWriteBoolean(bool param1)
+        private void BitWriteBoolean(bool param1)
         {
             double loc2 = BitLength % 8;
-            if (loc2 == 0)
+            if (loc2.Equals(0))
             {
                 Add(Convert.ToByte(false));
             }
@@ -189,19 +189,19 @@ namespace BlablaCore.Core.Cryptography
             {
                 this[(Count - 1)] = unchecked((byte)(this[(Count - 1)] + _powList[(int)(7 - loc2)]));
             }
-            Binary loc3 = this;
-            double loc4 = BitLength + 1;
+            var loc3 = this;
+            var loc4 = BitLength + 1;
             loc3.BitLength = loc4;
         }
 
         public void BitWriteBinaryData(Binary param1)
         {
-            double loc2 = Math.Min(param1.BitLength, (_powList[16] - 1));
+            var loc2 = Math.Min(param1.BitLength, (_powList[16] - 1));
             BitWriteUnsignedInt(16, loc2);
             BitWriteBinary(param1);
         }
 
-        public void BitWriteBinary(Binary param1)
+        private void BitWriteBinary(Binary param1)
         {
             double loc3 = 0;
             double loc4 = 0;
@@ -213,7 +213,7 @@ namespace BlablaCore.Core.Cryptography
                 loc3 = Math.Min(8, loc2);
                 loc4 = param1.BitReadUnsignedInt(loc3);
                 BitWriteUnsignedInt(loc3, loc4);
-                loc2 = loc2 - loc3;
+                loc2 =- loc3;
             }
         }
 
@@ -229,7 +229,7 @@ namespace BlablaCore.Core.Cryptography
             }
         }
 
-        public double Rshift(double param1, int param2)
+        private double Rshift(double param1, int param2)
         {
             return Math.Floor(param1 / _powList[param2]);
         }
@@ -239,9 +239,9 @@ namespace BlablaCore.Core.Cryptography
             return param1 * _powList[param2];
         }
 
-        public void WriteBytes(byte[] byteArray, int startIndex, int endIndex)
+        protected void WriteBytes(byte[] byteArray, int startIndex, int endIndex)
         {
-            int index = startIndex;
+            var index = startIndex;
             while (index < endIndex)
             {
                 Add(byteArray[index]);
@@ -249,22 +249,22 @@ namespace BlablaCore.Core.Cryptography
             }
         }
 
-        public static bool _init()
+        private static bool _init()
         {
             _powList = new List<double>();
-            int loc1 = 0;
+            var loc1 = 0;
             while (loc1 <= 32)
             {
                 _powList.Add(Math.Pow(2, loc1));
-                loc1 = loc1 + 1;
+                loc1 =+ 1;
             }
             return true;
         }
 
-        public byte[] ToByteArray()
+        protected byte[] ToByteArray()
         {
-            byte[] array = new byte[Count];
-            for (int i = 0; i < Count; i++)
+            var array = new byte[Count];
+            for (var i = 0; i < Count; i++)
             {
                 array[i] = unchecked(this[i]);
             }
