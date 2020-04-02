@@ -69,7 +69,6 @@ namespace BlablaCore.Core.Cryptography
             var loc2 = 0;
             while (loc2 < Count)
             {
-                
                 if (this[loc2] == 0)
                 {
                     loc1.Add(1);
