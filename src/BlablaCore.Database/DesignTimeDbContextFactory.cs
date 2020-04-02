@@ -8,7 +8,7 @@ namespace BlablaCore.Database
 {
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<BlablaCoreContext>
     {
-        private const string ConfigurationPath = "../../../configuration";
+        private const string ConfigurationPath = "./../../configuration";
 
         public BlablaCoreContext CreateDbContext(string[] args)
         {
