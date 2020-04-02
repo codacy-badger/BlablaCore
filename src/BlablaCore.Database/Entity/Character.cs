@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlablaCore.BlablaCore.Database.Entity
+namespace BlablaCore.Database.Entity
 {
     public class Character
     {

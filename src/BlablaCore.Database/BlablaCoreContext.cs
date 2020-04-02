@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using BlablaCore.BlablaCore.Database.Entity;
+using BlablaCore.Database.Entity;
 
 namespace BlablaCore.Database
 {
