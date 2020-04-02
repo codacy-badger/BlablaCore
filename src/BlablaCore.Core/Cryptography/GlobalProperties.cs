@@ -1,12 +1,13 @@
-﻿// ,-----.  ,--.        ,--.   ,--.         ,-----.                     
-// |  |) /_ |  | ,--,--.|  |-. |  | ,--,--.'  .--./ ,---. ,--.--. ,---. 
-// |  .-.  \|  |' ,-.  || .-. '|  |' ,-.  ||  |    | .-. ||  .--'| .-. :
-// |  '--' /|  |\ '-'  || `-' ||  |\ '-'  |'  '--'\' '-' '|  |   \   --.
-// `------' `--' `--`--' `---' `--' `--`--' `-----' `---' `--'    `----'
+﻿//  ____  _               ____  _               _____ ____  _____  ______ 
+// |  _ \| |        /\   |  _ \| |        /\   / ____/ __ \|  __ \|  ____|
+// | |_) | |       /  \  | |_) | |       /  \ | |   | |  | | |__) | |__   
+// |  _ <| |      / /\ \ |  _ <| |      / /\ \| |   | |  | |  _  /|  __|  
+// | |_) | |____ / ____ \| |_) | |____ / ____ \ |___| |__| | | \ \| |____ 
+// |____/|______/_/    \_\____/|______/_/    \_\_____\____/|_|  \_\______|
 // 
 // Copyright (C) 2020 - BlablaCore
 // 
-// NosCore is a free software: you can redistribute it and/or modify
+// BlablaCore is a free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or any later version.
 // 
