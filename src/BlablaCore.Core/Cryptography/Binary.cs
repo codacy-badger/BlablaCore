@@ -1,262 +1,270 @@
-﻿using System;
+﻿// ,-----.  ,--.        ,--.   ,--.         ,-----.                     
+// |  |) /_ |  | ,--,--.|  |-. |  | ,--,--.'  .--./ ,---. ,--.--. ,---. 
+// |  .-.  \|  |' ,-.  || .-. '|  |' ,-.  ||  |    | .-. ||  .--'| .-. :
+// |  '--' /|  |\ '-'  || `-' ||  |\ '-'  |'  '--'\' '-' '|  |   \   --.
+// `------' `--' `--`--' `---' `--' `--`--' `-----' `---' `--'    `----'
+// 
+// Copyright (C) 2020 - BlablaCore
+// 
+// NosCore is a free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 
 namespace BlablaCore.Core.Cryptography
 {
     public class Binary : List<byte>
     {
-        public double bitLength;
-        public double bitPosition;
-        public static List<double> powList;
-        public static bool __init = _init();
+        protected double BitLength;
+        protected double BitPosition;
+        private static List<double> _powList;
+        public static bool Init = _init();
 
-        public Binary()
+        protected Binary()
         {
-            this.bitLength = 0;
-            this.bitPosition = 0;
-            return;
+            BitLength = 0;
+            BitPosition = 0;
         }
 
-        public string bitReadString()
+        public string BitReadString()
         {
-            double _loc_4 = 0;
-            string _loc_1 = "";
-            double _loc_2 = this.bitReadUnsignedInt(16);
-            int _loc_3 = 0;
-            while (_loc_3 < _loc_2)
+            double loc4 = 0;
+            string loc1 = "";
+            double loc2 = BitReadUnsignedInt(16);
+            int loc3 = 0;
+            while (loc3 < loc2)
             {
 
-                _loc_4 = this.bitReadUnsignedInt(8);
-                if (_loc_4 == 255)
+                loc4 = BitReadUnsignedInt(8);
+                if (loc4 == 255)
                 {
-                    _loc_4 = 8364;
+                    loc4 = 8364;
                 }
-                _loc_1 = _loc_1 + unchecked((char)(byte)(_loc_4));
-                _loc_3 = _loc_3 + 1;
+                loc1 = loc1 + unchecked((char)(byte)(loc4));
+                loc3 = loc3 + 1;
             }
-            return _loc_1;
+            return loc1;
         }
 
-        public bool bitReadBoolean()
+        private bool BitReadBoolean()
         {
-            if (this.bitPosition == this.bitLength)
+            if (this.BitPosition == this.BitLength)
             {
                 return false;
             }
-            int _loc_1 = (int)Math.Floor((double)(this.bitPosition / 8));
-            double _loc_2 = this.bitPosition % 8;
-            Binary _loc_3 = this;
-            double _loc_4 = this.bitPosition + 1;
-            _loc_3.bitPosition = _loc_4;
-            return ((int)this[_loc_1] >> (int)(7 - _loc_2) & 1) == 1;
+            int loc1 = (int)Math.Floor((double)(BitPosition / 8));
+            double loc2 = BitPosition % 8;
+            Binary loc3 = this;
+            double loc4 = BitPosition + 1;
+            loc3.BitPosition = loc4;
+            return ((int)this[loc1] >> (int)(7 - loc2) & 1) == 1;
         }
 
-        public double bitReadUnsignedInt(double param1)
+        private double BitReadUnsignedInt(double param1)
         {
-            double _loc_4 = 0;
-            double _loc_5 = 0;
-            double _loc_6 = 0;
-            double _loc_7 = 0;
-            double _loc_8 = 0;
-            if (this.bitPosition + param1 > this.bitLength)
+            double loc4 = 0;
+            double loc5 = 0;
+            double loc6 = 0;
+            double loc7 = 0;
+            double loc8 = 0;
+            if (BitPosition + param1 > BitLength)
             {
-                this.bitPosition = this.bitLength;
+                BitPosition = BitLength;
                 return 0;
             }
-            double _loc_2 = 0;
-            double _loc_3 = param1;
-            while (_loc_3 > 0)
+            double loc2 = 0;
+            double loc3 = param1;
+            while (loc3 > 0)
             {
 
-                _loc_4 = (double)Math.Floor((double)(this.bitPosition / 8));
-                _loc_5 = (double)(this.bitPosition % 8);
-                _loc_6 = 8 - _loc_5;
-                _loc_7 = Math.Min(_loc_6, _loc_3);
-                _loc_8 = (double)((int)this[(int)_loc_4] >> (int)(_loc_6 - _loc_7) & (int)(powList[(int)_loc_7] - 1));
-                _loc_2 = _loc_2 + _loc_8 * (double)powList[(int)(_loc_3 - _loc_7)];
-                _loc_3 = _loc_3 - _loc_7;
-                this.bitPosition = this.bitPosition + _loc_7;
+                loc4 = (double)Math.Floor((double)(BitPosition / 8));
+                loc5 = (double)(BitPosition % 8);
+                loc6 = 8 - loc5;
+                loc7 = Math.Min(loc6, loc3);
+                loc8 = (double)((int)this[(int)loc4] >> (int)(loc6 - loc7) & (int)(_powList[(int)loc7] - 1));
+                loc2 = loc2 + loc8 * (double)_powList[(int)(loc3 - loc7)];
+                loc3 = loc3 - loc7; 
+                BitPosition = BitPosition + loc7;
             }
-            return _loc_2;
+            return loc2;
         }
 
-        public double bitReadSignedInt(double param1)
+        public double BitReadSignedInt(double param1)
         {
-            bool _loc_2 = this.bitReadBoolean();
-            return this.bitReadUnsignedInt((double)((param1 - 1) * (_loc_2 ? (1) : (-1))));
+            bool loc2 = BitReadBoolean();
+            return BitReadUnsignedInt((double)((param1 - 1) * (loc2 ? (1) : (-1))));
         }
 
-        public Binary bitReadBinaryData()
+        public Binary BitReadBinaryData()
         {
-            double _loc_1 = this.bitReadUnsignedInt(16);
-            return this.bitReadBinary(_loc_1);
+            double loc1 = BitReadUnsignedInt(16);
+            return BitReadBinary(loc1);
         }
 
-        public Binary bitReadBinary(double param1)
+        private Binary BitReadBinary(double param1)
         {
-            double _loc_5 = 0;
-            Binary _loc_2 = new Binary();
-            double _loc_3 = this.bitPosition;
-            while (this.bitPosition - _loc_3 < param1)
+            double loc5 = 0;
+            Binary loc2 = new Binary();
+            double loc3 = BitPosition;
+            while (BitPosition - loc3 < param1)
             {
 
-                if (this.bitPosition == this.bitLength)
+                if (BitPosition == BitLength)
                 {
-                    return _loc_2;
+                    return loc2;
                 }
-                _loc_5 = Math.Min(8, param1 - this.bitPosition + _loc_3);
-                _loc_2.bitWriteUnsignedInt(_loc_5, this.bitReadUnsignedInt(_loc_5));
+                loc5 = Math.Min(8, param1 - BitPosition + loc3);
+                loc2.BitWriteUnsignedInt(loc5, BitReadUnsignedInt(loc5));
             }
-            return _loc_2;
+            return loc2;
         }
 
-        public void bitWriteString(string param1)
+        public void BitWriteString(string param1)
         {
-            double _loc_4 = 0;
-            double _loc_2 = (double)Math.Min(param1.Length, (powList[16] - 1));
-            this.bitWriteUnsignedInt(16, _loc_2);
-            double _loc_3 = 0;
-            while (_loc_3 < _loc_2)
+            double loc4 = 0;
+            double loc2 = (double)Math.Min(param1.Length, (_powList[16] - 1));
+            BitWriteUnsignedInt(16, loc2);
+            double loc3 = 0;
+            while (loc3 < loc2)
             {
-
-                _loc_4 = unchecked((double)(param1[(int)_loc_3]));
-                if (_loc_4 == 8364)
+                loc4 = unchecked((double)(param1[(int)loc3]));
+                if (loc4 == 8364)
                 {
-                    _loc_4 = 255;
+                    loc4 = 255;
                 }
-                this.bitWriteUnsignedInt(8, _loc_4);
-                _loc_3 = _loc_3 + 1;
+                BitWriteUnsignedInt(8, loc4);
+                loc3 = loc3 + 1;
             }
-            return;
         }
 
-        public void bitWriteSignedInt(double param1, double param2)
+        public void BitWriteSignedInt(double param1, double param2)
         {
-            this.bitWriteBoolean(param2 >= 0);
-            this.bitWriteUnsignedInt((param1 - 1), Math.Abs(param2));
-            return;
+            BitWriteBoolean(param2 >= 0);
+            BitWriteUnsignedInt((param1 - 1), Math.Abs(param2));
         }
 
-        public void bitWriteUnsignedInt(double param1, double param2)
+        public void BitWriteUnsignedInt(double param1, double param2)
         {
-            double _loc_4 = 0;
-            double _loc_5 = 0;
-            double _loc_6 = 0;
-            double _loc_7 = 0;
-            param2 = (double)Math.Min((powList[(int)param1] - 1), param2);
-            double _loc_3 = param1;
-            while (_loc_3 > 0)
+            double loc4 = 0;
+            double loc5 = 0;
+            double loc6 = 0;
+            double loc7 = 0;
+            param2 = (double)Math.Min((_powList[(int)param1] - 1), param2);
+            double loc3 = param1;
+            while (loc3 > 0)
             {
-
-                _loc_4 = this.bitLength % 8;
-                if (_loc_4 == 0)
+                loc4 = this.BitLength % 8;
+                if (loc4 == 0)
                 {
                     Add(Convert.ToByte(false));
                 }
-                _loc_5 = 8 - _loc_4;
-                _loc_6 = Math.Min(_loc_5, _loc_3);
-                _loc_7 = this.Rshift(param2, (int)(_loc_3 - _loc_6));
-                this[(this.Count - 1)] = unchecked((byte)(this[(this.Count - 1)] + _loc_7 * powList[(int)(_loc_5 - _loc_6)]));
-                param2 = param2 - _loc_7 * powList[(int)(_loc_3 - _loc_6)];
-                _loc_3 = _loc_3 - _loc_6;
-                this.bitLength = this.bitLength + _loc_6;
+                loc5 = 8 - loc4;
+                loc6 = Math.Min(loc5, loc3);
+                loc7 = Rshift(param2, (int)(loc3 - loc6));
+                this[(Count - 1)] = unchecked((byte)(this[(Count - 1)] + loc7 * _powList[(int)(loc5 - loc6)]));
+                param2 = param2 - loc7 * _powList[(int)(loc3 - loc6)];
+                loc3 = loc3 - loc6;
+                BitLength = BitLength + loc6;
             }
-            return;
         }
 
-        public void bitWriteBoolean(bool param1)
+        public void BitWriteBoolean(bool param1)
         {
-            double _loc_2 = this.bitLength % 8;
-            if (_loc_2 == 0)
+            double loc2 = BitLength % 8;
+            if (loc2 == 0)
             {
                 Add(Convert.ToByte(false));
             }
             if (param1)
             {
-                this[(this.Count - 1)] = unchecked((byte)(this[(this.Count - 1)] + powList[(int)(7 - _loc_2)]));
+                this[(Count - 1)] = unchecked((byte)(this[(Count - 1)] + _powList[(int)(7 - loc2)]));
             }
-            Binary _loc_3 = this;
-            double _loc_4 = this.bitLength + 1;
-            _loc_3.bitLength = _loc_4;
-            return;
+            Binary loc3 = this;
+            double loc4 = BitLength + 1;
+            loc3.BitLength = loc4;
         }
 
-        public void bitWriteBinaryData(Binary param1)
+        public void BitWriteBinaryData(Binary param1)
         {
-            double _loc_2 = Math.Min(param1.bitLength, (powList[16] - 1));
-            this.bitWriteUnsignedInt(16, _loc_2);
-            this.bitWriteBinary(param1);
-            return;
+            double loc2 = Math.Min(param1.BitLength, (_powList[16] - 1));
+            BitWriteUnsignedInt(16, loc2);
+            BitWriteBinary(param1);
         }
 
-        public void bitWriteBinary(Binary param1)
+        public void BitWriteBinary(Binary param1)
         {
-            double _loc_3 = 0;
-            double _loc_4 = 0;
-            param1.bitPosition = 0;
-            double _loc_2 = param1.bitLength;
-            while (_loc_2 > 0)
+            double loc3 = 0;
+            double loc4 = 0;
+            param1.BitPosition = 0;
+            double loc2 = param1.BitLength;
+            while (loc2 > 0)
             {
 
-                _loc_3 = Math.Min(8, _loc_2);
-                _loc_4 = param1.bitReadUnsignedInt(_loc_3);
-                this.bitWriteUnsignedInt(_loc_3, _loc_4);
-                _loc_2 = _loc_2 - _loc_3;
+                loc3 = Math.Min(8, loc2);
+                loc4 = param1.BitReadUnsignedInt(loc3);
+                BitWriteUnsignedInt(loc3, loc4);
+                loc2 = loc2 - loc3;
             }
-            return;
         }
 
-        public void bitCopyObject(Binary param1)
+        public void BitCopyObject(Binary param1)
         {
-            this.bitPosition = param1.bitPosition;
-            this.bitLength = param1.bitLength;
-            double _loc_2 = 0;
-            while (_loc_2 < param1.Count)
+            BitPosition = param1.BitPosition;
+            BitLength = param1.BitLength;
+            double loc2 = 0;
+            while (loc2 < param1.Count)
             {
-
-                Add(param1[(int)_loc_2]);
-                _loc_2++;
+                Add(param1[(int)loc2]);
+                loc2++;
             }
-            return;
         }
 
         public double Rshift(double param1, int param2)
         {
-            return Math.Floor(param1 / powList[param2]);
+            return Math.Floor(param1 / _powList[param2]);
         }
 
         public double Lshift(double param1, int param2)
         {
-            return param1 * powList[param2];
+            return param1 * _powList[param2];
         }
 
-        public void writeBytes(byte[] byteArray, int startIndex, int endIndex)
+        public void WriteBytes(byte[] byteArray, int startIndex, int endIndex)
         {
             int index = startIndex;
             while (index < endIndex)
             {
-                this.Add(byteArray[index]);
+                Add(byteArray[index]);
                 index++;
             }
         }
 
         public static bool _init()
         {
-            powList = new List<double>();
-            int _loc_1 = 0;
-            while (_loc_1 <= 32)
+            _powList = new List<double>();
+            int loc1 = 0;
+            while (loc1 <= 32)
             {
-
-                powList.Add(Math.Pow(2, _loc_1));
-                _loc_1 = _loc_1 + 1;
+                _powList.Add(Math.Pow(2, loc1));
+                loc1 = loc1 + 1;
             }
             return true;
         }
 
-        public byte[] toByteArray()
+        public byte[] ToByteArray()
         {
-            byte[] array = new byte[this.Count];
-            for (int i = 0; i < this.Count; i++)
+            byte[] array = new byte[Count];
+            for (int i = 0; i < Count; i++)
             {
                 array[i] = unchecked(this[i]);
             }

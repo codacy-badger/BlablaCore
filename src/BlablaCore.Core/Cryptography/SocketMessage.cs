@@ -1,8 +1,27 @@
-﻿namespace BlablaCore.Core.Cryptography
+﻿// ,-----.  ,--.        ,--.   ,--.         ,-----.                     
+// |  |) /_ |  | ,--,--.|  |-. |  | ,--,--.'  .--./ ,---. ,--.--. ,---. 
+// |  .-.  \|  |' ,-.  || .-. '|  |' ,-.  ||  |    | .-. ||  .--'| .-. :
+// |  '--' /|  |\ '-'  || `-' ||  |\ '-'  |'  '--'\' '-' '|  |   \   --.
+// `------' `--' `--`--' `---' `--' `--`--' `-----' `---' `--'    `----'
+// 
+// Copyright (C) 2020 - BlablaCore
+// 
+// NosCore is a free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+namespace BlablaCore.Core.Cryptography
 {
     public class SocketMessage : Binary
     {
-
         public SocketMessage()
         {
             return;
@@ -12,64 +31,62 @@
         {
             for (int i = 0; i < buf.Length; i++)
             {
-                this.Add(buf[i]);
+                Add(buf[i]);
             }
-            return;
         }
 
-        public SocketMessage duplicate()
+        public SocketMessage Duplicate()
         {
-            SocketMessage _loc_1 = new SocketMessage();
-            _loc_1.writeBytes(this.toByteArray(), 0, this.Count);
-            _loc_1.bitLength = this.bitLength;
-            _loc_1.bitPosition = this.bitPosition;
-            return _loc_1;
+            SocketMessage loc1 = new SocketMessage();
+            loc1.WriteBytes(ToByteArray(), 0, Count);
+            loc1.BitLength = BitLength;
+            loc1.BitPosition = BitPosition;
+            return loc1;
         }
 
-        public void readMessage(byte[] param1)
+        public void ReadMessage(byte[] param1)
         {
-            int _loc_2 = 0;
-            while (_loc_2 < param1.Length)
+            int loc2 = 0;
+            while (loc2 < param1.Length)
             {
-                if (param1[_loc_2] == 1)
+                if (param1[loc2] == 1)
                 {
-                    _loc_2 = _loc_2 + 1;
-                    this.Add((byte)(param1[_loc_2] == 2 ? (1) : (0)));
+                    loc2 = loc2 + 1;
+                    Add((byte)(param1[loc2] == 2 ? (1) : (0)));
                 }
                 else
                 {
-                    this.Add(param1[_loc_2]);
+                    Add(param1[loc2]);
                 }
-                _loc_2 = _loc_2 + 1;
+                loc2 = loc2 + 1;
             }
-            bitLength = Count * 8;
-            return;
+            BitLength = Count * 8;
         }
 
-        public byte[] exportMessage()
+        public byte[] ExportMessage()
         {
-            SocketMessage _loc_1 = new SocketMessage();
-            int _loc_2 = 0;
-            while (_loc_2 < this.Count)
+            SocketMessage loc1 = new SocketMessage();
+            int loc2 = 0;
+            while (loc2 < Count)
             {
                 
-                if (this[_loc_2] == 0)
+                if (this[loc2] == 0)
                 {
-                    _loc_1.Add(1);
-                    _loc_1.Add(3);
+                    loc1.Add(1);
+                    loc1.Add(3);
                 }
-                else if (this[_loc_2] == 1)
+                else if (this[loc2] == 1)
                 {
-                    _loc_1.Add(1);
-                    _loc_1.Add(2);
+                    loc1.Add(1);
+                    loc1.Add(2);
                 }
                 else
                 {
-                    _loc_1.Add(this[_loc_2]);
+                    loc1.Add(this[loc2]);
                 }
-                _loc_2 = _loc_2 + 1;
+                loc2 = loc2 + 1;
             }
-            return _loc_1.toByteArray();
+            return loc1.ToByteArray();
         }
     }
 }
