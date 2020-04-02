@@ -58,16 +58,16 @@ namespace BlablaCore.Core.Cryptography
 
         private bool BitReadBoolean()
         {
-            if (this.BitPosition == this.BitLength)
+            if (BitPosition == BitLength)
             {
                 return false;
             }
-            int loc1 = (int)Math.Floor((double)(BitPosition / 8));
+            int loc1 = (int)Math.Floor((BitPosition / 8));
             double loc2 = BitPosition % 8;
             Binary loc3 = this;
             double loc4 = BitPosition + 1;
             loc3.BitPosition = loc4;
-            return ((int)this[loc1] >> (int)(7 - loc2) & 1) == 1;
+            return (this[loc1] >> (int)(7 - loc2) & 1) == 1;
         }
 
         private double BitReadUnsignedInt(double param1)
@@ -87,12 +87,12 @@ namespace BlablaCore.Core.Cryptography
             while (loc3 > 0)
             {
 
-                loc4 = (double)Math.Floor((double)(BitPosition / 8));
-                loc5 = (double)(BitPosition % 8);
+                loc4 = Math.Floor((BitPosition / 8));
+                loc5 = (BitPosition % 8);
                 loc6 = 8 - loc5;
                 loc7 = Math.Min(loc6, loc3);
-                loc8 = (double)((int)this[(int)loc4] >> (int)(loc6 - loc7) & (int)(_powList[(int)loc7] - 1));
-                loc2 = loc2 + loc8 * (double)_powList[(int)(loc3 - loc7)];
+                loc8 = (this[(int)loc4] >> (int)(loc6 - loc7) & (int)(_powList[(int)loc7] - 1));
+                loc2 = loc2 + loc8 * _powList[(int)(loc3 - loc7)];
                 loc3 = loc3 - loc7; 
                 BitPosition = BitPosition + loc7;
             }
@@ -102,7 +102,7 @@ namespace BlablaCore.Core.Cryptography
         public double BitReadSignedInt(double param1)
         {
             bool loc2 = BitReadBoolean();
-            return BitReadUnsignedInt((double)((param1 - 1) * (loc2 ? (1) : (-1))));
+            return BitReadUnsignedInt(((param1 - 1) * (loc2 ? (1) : (-1))));
         }
 
         public Binary BitReadBinaryData()
@@ -132,12 +132,12 @@ namespace BlablaCore.Core.Cryptography
         public void BitWriteString(string param1)
         {
             double loc4 = 0;
-            double loc2 = (double)Math.Min(param1.Length, (_powList[16] - 1));
+            double loc2 = Math.Min(param1.Length, (_powList[16] - 1));
             BitWriteUnsignedInt(16, loc2);
             double loc3 = 0;
             while (loc3 < loc2)
             {
-                loc4 = unchecked((double)(param1[(int)loc3]));
+                loc4 = unchecked((param1[(int)loc3]));
                 if (loc4 == 8364)
                 {
                     loc4 = 255;
@@ -159,11 +159,11 @@ namespace BlablaCore.Core.Cryptography
             double loc5 = 0;
             double loc6 = 0;
             double loc7 = 0;
-            param2 = (double)Math.Min((_powList[(int)param1] - 1), param2);
+            param2 = Math.Min((_powList[(int)param1] - 1), param2);
             double loc3 = param1;
             while (loc3 > 0)
             {
-                loc4 = this.BitLength % 8;
+                loc4 = BitLength % 8;
                 if (loc4 == 0)
                 {
                     Add(Convert.ToByte(false));
