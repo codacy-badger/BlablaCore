@@ -44,7 +44,6 @@ namespace BlablaCore.Core.Cryptography
             var loc3 = 0;
             while (loc3 < loc2)
             {
-
                 loc4 = BitReadUnsignedInt(8);
                 if (loc4.Equals(255))
                 {
@@ -86,7 +85,6 @@ namespace BlablaCore.Core.Cryptography
             var loc3 = param1;
             while (loc3 > 0)
             {
-
                 loc4 = Math.Floor((BitPosition / 8));
                 loc5 = (BitPosition % 8);
                 loc6 = 8 - loc5;
@@ -118,7 +116,6 @@ namespace BlablaCore.Core.Cryptography
             var loc3 = BitPosition;
             while (BitPosition - loc3 < param1)
             {
-
                 if (BitPosition.Equals(BitLength))
                 {
                     return loc2;
@@ -209,7 +206,6 @@ namespace BlablaCore.Core.Cryptography
             double loc2 = param1.BitLength;
             while (loc2 > 0)
             {
-
                 loc3 = Math.Min(8, loc2);
                 loc4 = param1.BitReadUnsignedInt(loc3);
                 BitWriteUnsignedInt(loc3, loc4);
