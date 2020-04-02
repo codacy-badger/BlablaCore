@@ -49,8 +49,8 @@ namespace BlablaCore.Core.Cryptography
                 {
                     loc4 = 8364;
                 }
-                loc1 = loc1 + unchecked((char)(byte)(loc4));
-                loc3 = loc3 + 1;
+                loc1 += unchecked((char)(byte)(loc4));
+                loc3 =+ 1;
             }
             return loc1;
         }
@@ -92,7 +92,7 @@ namespace BlablaCore.Core.Cryptography
                 loc8 = (this[(int)loc4] >> (int)(loc6 - loc7) & (int)(_powList[(int)loc7] - 1));
                 loc2 =+ loc8 * _powList[(int)(loc3 - loc7)];
                 loc3 =- loc7; 
-                BitPosition = BitPosition + loc7;
+                BitPosition =+ loc7;
             }
             return loc2;
         }
@@ -177,7 +177,7 @@ namespace BlablaCore.Core.Cryptography
 
         private void BitWriteBoolean(bool param1)
         {
-            double loc2 = BitLength % 8;
+            var loc2 = BitLength % 8;
             if (loc2.Equals(0))
             {
                 Add(Convert.ToByte(false));
@@ -203,7 +203,7 @@ namespace BlablaCore.Core.Cryptography
             double loc3 = 0;
             double loc4 = 0;
             param1.BitPosition = 0;
-            double loc2 = param1.BitLength;
+            var loc2 = param1.BitLength;
             while (loc2 > 0)
             {
                 loc3 = Math.Min(8, loc2);
@@ -262,7 +262,7 @@ namespace BlablaCore.Core.Cryptography
             var array = new byte[Count];
             for (var i = 0; i < Count; i++)
             {
-                array[i] = unchecked(this[i]);
+                array[i] = this[i];
             }
             return array;
         }
